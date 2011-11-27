@@ -3,10 +3,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/Nick/Documents/MinecraftServer/bukkit-1.0.0-R1-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nick/Documents/MinecraftServer/lib.PatPeter.SQLibrary_v3_a5_f1.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Nick/Documents/MinecraftServer/lib.PatPeter.SQLibrary_v3_a5_f1.zip!/lib/PatPeter/SQLibrary"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

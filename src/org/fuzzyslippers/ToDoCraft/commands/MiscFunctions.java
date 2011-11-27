@@ -7,7 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Logger;
+//import lib.PatPeter.SQLibrary.*;
+import lib.PatPeter.SQLibrary.SQLite;
 
 import org.bukkit.command.CommandSender;
 
@@ -17,6 +21,7 @@ public class MiscFunctions {
 		String newstring = "[ToDoCraft] " + string;
 		log.info(newstring);
 	}
+	// convert args to string
 	public static String argsToString(String[] args, int startingarg, String separator){
 		String arraystring = "";
 		for(int i = startingarg; i<args.length; i++){
@@ -24,6 +29,7 @@ public class MiscFunctions {
 		}
 		return arraystring;
 	}
+	//write tasks
 	Charset chars = Charset.forName("US-ASCII");
 	public static void writeTasks(String task, File filename){
 		
@@ -35,6 +41,7 @@ public class MiscFunctions {
 			report("IOError!");
 		}
 	}
+	//read tasks
 	public static void readTasks(int linenumber, File file, CommandSender sender){
 		try{
 			BufferedReader in = new BufferedReader(new FileReader(file));
@@ -44,5 +51,26 @@ public class MiscFunctions {
 		} catch (IOException e){
 			report("IOError!");
 		}
+	}
+	//Database start
+	public static File dbFolder = new File("plugins/ToDoCraft");
+	public static SQLite dbManage = new SQLite(log, "[ToDoCraft]", "tasks", dbFolder.getPath());
+	public static void enableDB(){
+		dbManage.initialize();
+	}
+	//Database close
+	public static void disableDB(){
+		dbManage.close();
+	}
+	// Create Tables
+	
+	public static void createTable(String username){
+		dbManage.createTable("CREATE TABLE "+username +"('id' INTEGER PRIMARY KEY, 'importance' text NOT NULL, 'task' text NOT NULL, 'done' INT NOT NULL DEFAULT 0)");
+	}
+	// Database Write tasks
+	public static void writeDBTasks(String priority, String username, String task) throws SQLException{
+		ResultSet count = dbManage.query("SELECT COUNT(*) FROM " + username );
+		int countint = count.getInt("id");
+		dbManage.query("INSERT INTO "+username + " VALUES ("+countint+", '"+priority+"', '"+task+"', 0");
 	}
 }

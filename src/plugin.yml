@@ -11,3 +11,7 @@ commands:
   description: This will read a task as denoted by the number of that task
   permission: ToDoCraft.readtask
   usage: /readtask <tasknumber>
+ maketasktable:
+  description: This will create a task table for the specified user.
+  permission: ToDoCraft.maketasktable
+  usage: /maketasktable 
