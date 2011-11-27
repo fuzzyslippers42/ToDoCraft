@@ -7,7 +7,7 @@ commands:
   description: This will add a task to the player's task list
   permission: ToDoCraft.addtask
   usage: /addtask <high/normal/low> <task to add>
-  readtask:
-   description: This will read a task as denoted by the number of that task
-   permission: ToDoCraft.readtask
-   usage: /readtask <tasknumber>
+ readtask:
+  description: This will read a task as denoted by the number of that task
+  permission: ToDoCraft.readtask
+  usage: /readtask <tasknumber>
