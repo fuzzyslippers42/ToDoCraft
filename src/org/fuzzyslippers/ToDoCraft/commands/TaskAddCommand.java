@@ -26,13 +26,8 @@ public class TaskAddCommand implements CommandExecutor {
 				return false;
 			}
 			String task = MiscFunctions.argsToString(args, 1, " ");
-			try {
-				MiscFunctions.writeDBTasks(priority, sendername, task);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				sender.sendMessage(ChatColor.DARK_RED+"Something went wrong when adding your task! Contact an admin!");
-				MiscFunctions.report(e.toString());
-			}
+			MiscFunctions.writeDBTasks(priority, sendername, task);
+			sender.sendMessage(ChatColor.DARK_GREEN+"Created task "+task+ " with priority "+priority+"!");
 			return true;
 		}
 		return false;

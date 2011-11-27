@@ -57,6 +57,7 @@ public class MiscFunctions {
 	public static SQLite dbManage = new SQLite(log, "[ToDoCraft]", "tasks", dbFolder.getPath());
 	public static void enableDB(){
 		dbManage.initialize();
+		dbManage.open();
 	}
 	//Database close
 	public static void disableDB(){
@@ -65,12 +66,17 @@ public class MiscFunctions {
 	// Create Tables
 	
 	public static void createTable(String username){
-		dbManage.createTable("CREATE TABLE "+username +"('id' INTEGER PRIMARY KEY, 'importance' text NOT NULL, 'task' text NOT NULL, 'done' INT NOT NULL DEFAULT 0)");
+		dbManage.createTable("CREATE TABLE "+username +"('id' INTEGER PRIMARY KEY, 'IMPORTANCE' text NOT NULL, 'TASK' text NOT NULL, 'DONE' INT NOT NULL DEFAULT 0)");
 	}
 	// Database Write tasks
-	public static void writeDBTasks(String priority, String username, String task) throws SQLException{
-		ResultSet count = dbManage.query("SELECT COUNT(*) FROM " + username );
-		int countint = count.getInt("id");
-		dbManage.query("INSERT INTO "+username + " VALUES ("+countint+", '"+priority+"', '"+task+"', 0");
+	public static void writeDBTasks(String priority, String username, String task){
+		try{
+			ResultSet count = dbManage.query("SELECT COUNT(*) as count FROM " + username );
+			int countint = count.getInt("count");
+			dbManage.query("INSERT INTO "+username + "(id, IMPORTANCE, TASK, DONE) VALUES("+countint+", '"+priority+"', '"+task+"', 0)");
+		} catch (Exception e){
+			report("Something went wrong writing the DataBase!");
+			report(e.getMessage());
+		}
 	}
 }
