@@ -20,9 +20,10 @@ public class ToDoCraft extends JavaPlugin {
 	public void onEnable() {
 		// TODO Auto-generated method stub
 		MiscFunctions.report("Starting Up!");
+		MiscFunctions.report("Enabling Commands!");
 		getCommand("addtask").setExecutor(new TaskAddCommand());
-		TaskReadCommand readtaskcommand = new TaskReadCommand();
-		getCommand("readtask").setExecutor(readtaskcommand);
+		//TaskReadCommand readtaskcommand = new TaskReadCommand();
+		getCommand("readtask").setExecutor(new TaskReadCommand());
 	}
 	
 }
