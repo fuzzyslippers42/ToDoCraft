@@ -6,18 +6,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.nio.charset.Charset;
-import java.sql.Array;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.logging.Logger;
-//import lib.PatPeter.SQLibrary.*;
 import lib.PatPeter.SQLibrary.SQLite;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class MiscFunctions {
 	static Logger log = Logger.getLogger("Minecraft");
@@ -112,6 +108,18 @@ public class MiscFunctions {
 			
 		} catch (Exception e){
 			report(e.toString());
+		}
+	}
+	public static void finishTask(CommandSender sender, String task){
+		try{
+			String sendername = sender.getName();
+			dbManage.query("UPDATE "+sendername + " SET DONE=0 WHERE TASK='"+task+"'");
+			sender.sendMessage(ChatColor.GREEN + "Successfully  completed " + ChatColor.LIGHT_PURPLE + "" + task);
+		} catch (Exception e){
+			report(e.toString());
+			Throwable cause = e.getCause();
+			report(cause.toString());
+			
 		}
 	}
 }

@@ -1,8 +1,5 @@
 package org.fuzzyslippers.ToDoCraft.commands;
 
-//import lib.PatPeter.*;
-
-import java.sql.SQLException;
 
 import org.fuzzyslippers.ToDoCraft.commands.MiscFunctions;
 import org.bukkit.ChatColor;

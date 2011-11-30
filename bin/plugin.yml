@@ -1,6 +1,6 @@
 name: ToDoCraft
 main: org.fuzzyslippers.ToDoCraft.ToDoCraft
-version: Beta
+version: 0.1
 
 commands:
  addtask:
@@ -15,3 +15,7 @@ commands:
   description: This will create a task table for the specified user.
   permission: ToDoCraft.maketasktable
   usage: /maketasktable 
+ finishtask:
+  description: This will finish a task.
+  permission: ToDoCraft.finishtask
+  usage: /finishtask [Task String]
