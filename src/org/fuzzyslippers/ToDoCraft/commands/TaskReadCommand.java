@@ -11,6 +11,7 @@ public class TaskReadCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("readtask")){
+			MiscFunctions.readDBTasks(sender);
 			return true;
 		}
 		return true;

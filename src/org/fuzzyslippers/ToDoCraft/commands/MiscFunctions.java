@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 //import lib.PatPeter.SQLibrary.*;
 import lib.PatPeter.SQLibrary.SQLite;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -88,9 +89,9 @@ public class MiscFunctions {
 			report(e.getStackTrace().toString());
 		}
 	}
-	public static void readDBTasks(Player user){
+	public static void readDBTasks(CommandSender sender){
 		try{
-			String username = user.getName();
+			String username = sender.getName();
 			ResultSet result = dbManage.query("Select id, IMPORTANCE, TASK, DONE from " + username);
 			ResultSet totaltasks = dbManage.query("Select count(id) as counted from " +username);
 			int totaltaskint = totaltasks.getInt("counted");
@@ -106,7 +107,7 @@ public class MiscFunctions {
 				} else {
 					taskdonestring = "done";
 				}
-				user.sendMessage(tasknumber + ": " + taskimportance + " - " + tasktask + " is " + taskdonestring + ".");
+				sender.sendMessage(ChatColor.GREEN + ""+ tasknumber + ": " + ChatColor.BLUE+""+ taskimportance + " - " +ChatColor.LIGHT_PURPLE +""+ tasktask + ChatColor.WHITE+" is " + ChatColor.GREEN+""+ taskdonestring + ".");
 			}
 			
 		} catch (Exception e){
