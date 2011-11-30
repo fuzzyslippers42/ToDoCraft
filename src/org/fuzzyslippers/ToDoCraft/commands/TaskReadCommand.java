@@ -11,12 +11,6 @@ public class TaskReadCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("readtask")){
-			String foldername = "ToDoCraft";
-			MiscFunctions.report(foldername);
-			String sendername = sender.getName();
-			MiscFunctions.report(sendername);
-			File currentfile = new File(foldername + "/" + sendername +"todolist.txt");
-			MiscFunctions.readTasks(0, currentfile, sender);
 			return true;
 		}
 		return true;

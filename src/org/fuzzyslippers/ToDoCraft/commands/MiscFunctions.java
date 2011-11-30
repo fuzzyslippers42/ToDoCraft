@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
@@ -14,6 +16,7 @@ import java.util.logging.Logger;
 import lib.PatPeter.SQLibrary.SQLite;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class MiscFunctions {
 	static Logger log = Logger.getLogger("Minecraft");
@@ -25,7 +28,7 @@ public class MiscFunctions {
 	public static String argsToString(String[] args, int startingarg, String separator){
 		String arraystring = "";
 		for(int i = startingarg; i<args.length; i++){
-			arraystring = arraystring + separator + args[i];
+			arraystring = arraystring + args[i] + separator;
 		}
 		return arraystring;
 	}
@@ -66,17 +69,48 @@ public class MiscFunctions {
 	// Create Tables
 	
 	public static void createTable(String username){
-		dbManage.createTable("CREATE TABLE "+username +"('id' INTEGER PRIMARY KEY, 'IMPORTANCE' text NOT NULL, 'TASK' text NOT NULL, 'DONE' INT NOT NULL DEFAULT 0)");
+		dbManage.createTable("CREATE TABLE "+username +" ('id' INTEGER PRIMARY KEY, 'IMPORTANCE' text, 'TASK' text, 'DONE' INT DEFAULT 0)");
 	}
 	// Database Write tasks
 	public static void writeDBTasks(String priority, String username, String task){
 		try{
-			ResultSet count = dbManage.query("SELECT COUNT(*) as count FROM " + username );
-			int countint = count.getInt("count");
-			dbManage.query("INSERT INTO "+username + "(id, IMPORTANCE, TASK, DONE) VALUES("+countint+", '"+priority+"', '"+task+"', 0)");
+			int zero = 0;
+			if(zero==0){
+				dbManage.query("INSERT INTO " +username + " (IMPORTANCE, TASK, DONE) VALUES ('"+priority+"', '"+task+"', 0)");
+			}
+			else {
+				report("Couldn't count tasks!");
+			}
+			
 		} catch (Exception e){
 			report("Something went wrong writing the DataBase!");
 			report(e.getMessage());
+			report(e.getStackTrace().toString());
+		}
+	}
+	public static void readDBTasks(Player user){
+		try{
+			String username = user.getName();
+			ResultSet result = dbManage.query("Select id, IMPORTANCE, TASK, DONE from " + username);
+			ResultSet totaltasks = dbManage.query("Select count(id) as counted from " +username);
+			int totaltaskint = totaltasks.getInt("counted");
+			for(int i = 0; i != totaltaskint; i++){
+				result.next();
+				int tasknumber = result.getInt("id");
+				String taskimportance = result.getString("IMPORTANCE");
+				String tasktask = result.getString("TASK");
+				int taskdone = result.getInt("DONE");
+				String taskdonestring;
+				if(taskdone==0){
+					taskdonestring = "not done";
+				} else {
+					taskdonestring = "done";
+				}
+				user.sendMessage(tasknumber + ": " + taskimportance + " - " + tasktask + " is " + taskdonestring + ".");
+			}
+			
+		} catch (Exception e){
+			report(e.toString());
 		}
 	}
 }
