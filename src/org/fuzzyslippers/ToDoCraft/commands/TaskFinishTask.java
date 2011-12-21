@@ -1,6 +1,6 @@
 package org.fuzzyslippers.ToDoCraft.commands;
 
-
+import org.fuzzyslippers.ToDoCraft.commands.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,6 +12,7 @@ public class TaskFinishTask implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("finishtask")){
 			String tasktocomplete = MiscFunctions.argsToString(args, 0, " ");
 			MiscFunctions.finishTask(sender, tasktocomplete);
+                                                        return true;
 		}
 		return false;
 	}
