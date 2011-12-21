@@ -113,7 +113,9 @@ public class MiscFunctions {
 	public static void finishTask(CommandSender sender, String task){
 		try{
 			String sendername = sender.getName();
-			dbManage.query("UPDATE "+sendername + " SET DONE=1 WHERE TASK='"+task+"'");
+                                                        report(sendername);
+                                                        report(task);
+			dbManage.query("UPDATE "+sendername + " SET DONE=1 WHERE TASK='" +task+"'");
 			sender.sendMessage(ChatColor.GREEN + "Successfully  completed " + ChatColor.LIGHT_PURPLE + "" + task);
 		} catch (Exception e){
 			report(e.toString());

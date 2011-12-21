@@ -11,6 +11,7 @@ import org.fuzzyslippers.ToDoCraft.commands.TaskMakeTaskTableCommand;
 import org.fuzzyslippers.ToDoCraft.commands.TaskReadCommand;
 //import lib.PatPeter.*;
 import lib.PatPeter.SQLibrary.*;
+import org.fuzzyslippers.ToDoCraft.commands.TaskFinishTask;
 //import java.io.BufferedWriter;
 //import java.io.DataOutputStream;
 
@@ -45,6 +46,7 @@ public class ToDoCraft extends JavaPlugin {
 		} catch (Exception e) {
 			MiscFunctions.report("Something went wrong adding command maketasktable! " + e.getStackTrace());
 		}
+                                     getCommand("finishtask").setExecutor(new TaskFinishTask());
 		MiscFunctions.report("Starting database!");
 		
 		
