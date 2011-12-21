@@ -144,9 +144,13 @@ public class SQLite extends DatabaseHandler {
 				return retryResult(query);
 				//this.writeError("",false);
 			} else {
+                                                                          if(ex.toString().contains("query does not return ResultSet")){
+                                                                              ex = null;
+                                                                          }else{
 				this.writeError("Error at SQL Query: " + ex.getMessage(), false);
-			}
 			
+                                                                          }
+                                                    }
 		}
 		return null;
 	}
