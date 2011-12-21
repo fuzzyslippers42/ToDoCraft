@@ -9,12 +9,10 @@ public class TaskFinishTask implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if(cmd.getName().equalsIgnoreCase("finishtask")){
-			String tasktocomplete = MiscFunctions.argsToString(args, 0, " ");
-			MiscFunctions.finishTask(sender, tasktocomplete);
-                                                        return true;
-		}
-		return false;
+		
+		String tasktocomplete = MiscFunctions.argsToString(args, 0, " ");
+		MiscFunctions.finishTask(sender, tasktocomplete);
+                                     return true;
 	}
 	
 }
