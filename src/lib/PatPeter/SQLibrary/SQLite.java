@@ -119,19 +119,22 @@ public class SQLite extends DatabaseHandler {
 	
 	@Override
 	public ResultSet query(String query) {
-		Connection connection = null;
+		Connection serverConnection = null;
 		Statement statement = null;
 		ResultSet result = null;
 		
 		try {
-			connection = this.open();
-			statement = connection.createStatement();
+			serverConnection = this.open();
+			statement = serverConnection.createStatement();
 			
 			switch (this.getStatement(query)) {
 				case SELECT:
+                                                                                        try{
 					result = statement.executeQuery(query);
 					return result;
-					
+                                                                                        } catch (SQLException ex) {
+                                                                                            this.writeError("Error while SELECTing items (No items may be present!) :" + ex.getMessage(), connected);
+                                                                                        }
 				default:
 					statement.executeQuery(query);
 					return result;	

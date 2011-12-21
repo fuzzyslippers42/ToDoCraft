@@ -1,0 +1,21 @@
+name: ToDoCraft
+main: org.fuzzyslippers.ToDoCraft.ToDoCraft
+version: 0.1
+
+commands:
+ addtask:
+  description: This will add a task to the player's task list
+  permission: ToDoCraft.addtask
+  usage: /addtask <high/normal/low> <task to add>
+ readtask:
+  description: This will read a task as denoted by the number of that task
+  permission: ToDoCraft.readtask
+  usage: /readtask <tasknumber>
+ maketasktable:
+  description: This will create a task table for the specified user.
+  permission: ToDoCraft.maketasktable
+  usage: /maketasktable 
+ finishtask:
+  description: This will finish a task.
+  permission: ToDoCraft.finishtask
+  usage: /finishtask [Task String]
