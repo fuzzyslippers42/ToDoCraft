@@ -1,22 +1,16 @@
 package org.fuzzyslippers.ToDoCraft.commands;
 
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
+import java.io.*;
 import java.nio.charset.Charset;
 import java.sql.ResultSet;
 import java.util.logging.Logger;
 import lib.PatPeter.SQLibrary.SQLite;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public class MiscFunctions {
-	static Logger log = Logger.getLogger("Minecraft");
+        // create logger that adds the [ToDoCraft] tag to each log
+	static final Logger log = Logger.getLogger("Minecraft");
 	public static void report(String string){
 		String newstring = "[ToDoCraft] " + string;
 		log.info(newstring);
@@ -29,7 +23,7 @@ public class MiscFunctions {
 		}
 		return arraystring;
 	}
-	//write tasks
+	//write tasks ** DEPRECATED **
 	Charset chars = Charset.forName("US-ASCII");
 	public static void writeTasks(String task, File filename){
 		
@@ -41,7 +35,7 @@ public class MiscFunctions {
 			report("IOError!");
 		}
 	}
-	//read tasks
+	//read tasks ** DEPRECATED **
 	public static void readTasks(int linenumber, File file, CommandSender sender){
 		try{
 			BufferedReader in = new BufferedReader(new FileReader(file));
@@ -85,6 +79,7 @@ public class MiscFunctions {
 			report(e.getStackTrace().toString());
 		}
 	}
+        // Read Database Tasks
 	public static void readDBTasks(CommandSender sender){
 		try{
 			String username = sender.getName();
@@ -110,6 +105,7 @@ public class MiscFunctions {
 			report(e.toString());
 		}
 	}
+        // Complete a task witha sender and a task string
 	public static void finishTask(CommandSender sender, String task){
 		try{
 			String sendername = sender.getName();
